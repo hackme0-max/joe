@@ -143,6 +143,131 @@
             margin-bottom: 3rem;
         }
         
+        /* Brand Badge - Modern Metallic Design */
+        .brand-section-header {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0 1.5rem 0;
+        }
+        
+        .brand-badge {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 4rem;
+            background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e8e8e8 100%);
+            border-radius: 50px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brand-badge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.4) 0%,
+                transparent 50%,
+                rgba(0, 0, 0, 0.05) 100%
+            );
+            border-radius: 50px;
+        }
+        
+        .brand-badge::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        
+        .brand-badge:hover::after {
+            opacity: 1;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+        
+        .badge-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent
+            );
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            50%, 100% {
+                left: 100%;
+            }
+        }
+        
+        .badge-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1.75rem;
+            font-weight: 800;
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 50%, #1a1a1a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Valero Badge - Blue tones */
+        .valero-badge {
+            background: linear-gradient(135deg, #d4e8f0 0%, #e8f4f8 50%, #d4e8f0 100%);
+            border: 2px solid rgba(168, 213, 226, 0.5);
+        }
+        
+        .valero-badge .badge-text {
+            background: linear-gradient(135deg, #2c5f7a 0%, #4a8ba8 50%, #2c5f7a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .valero-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 40px rgba(168, 213, 226, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.9),
+                inset 0 -2px 4px rgba(168, 213, 226, 0.2);
+        }
+        
         .products-count {
             font-size: 1rem;
             color: #737373;
@@ -216,6 +341,14 @@
             .products-count {
                 font-size: 0.9375rem;
             }
+            
+            .brand-badge {
+                padding: 1.25rem 3rem;
+            }
+            
+            .badge-text {
+                font-size: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -268,6 +401,14 @@
 
             .products-count {
                 font-size: 0.875rem;
+            }
+            
+            .brand-badge {
+                padding: 1rem 2rem;
+            }
+            
+            .badge-text {
+                font-size: 1.25rem;
             }
 
             .loading {
@@ -327,7 +468,12 @@
             <a href="index.html" class="back-link">→ العودة للرئيسية</a>
             
             <div class="products-header">
-                <h2 class="section-title">مجموعة فاليرو</h2>
+                <div class="brand-section-header">
+                    <div class="brand-badge valero-badge">
+                        <div class="badge-shine"></div>
+                        <span class="badge-text">مجموعة فاليرو</span>
+                    </div>
+                </div>
                 <p class="products-count" id="products-count">جاري التحميل...</p>
             </div>
             
@@ -340,11 +486,10 @@
     <script>
         // Carousel Configuration
         const carouselImages = [
-            'images/v-banner1.png',
+            // 'images/v-banner1.png',
             'images/v-banner3.png',
             'images/v-banner2.png'
 
-            // Add more images here as needed
         ];
 
         let currentSlide = 0;
