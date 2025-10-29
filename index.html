@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELKAYAL - العناية الشخصية</title>
+    <title>ELKAYAL -  Store</title>
     <meta name="description" content="ELKAYAL علامة تجارية للعناية الشخصية تسعى لبناء مستقبل أفضل للكوكب والإنسانية.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -152,6 +152,173 @@
             text-align: center;
             margin: 2rem 0 2rem 0;
             font-family: 'Cairo', sans-serif;
+        }
+        
+        /* Brand Badge - Modern Metallic Design */
+        .brand-section-header {
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0 2rem 0;
+        }
+        
+        .brand-badge {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 4rem;
+            background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e8e8e8 100%);
+            border-radius: 50px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brand-badge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.4) 0%,
+                transparent 50%,
+                rgba(0, 0, 0, 0.05) 100%
+            );
+            border-radius: 50px;
+        }
+        
+        .brand-badge::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        
+        .brand-badge:hover::after {
+            opacity: 1;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+        
+        .badge-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent
+            );
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            50%, 100% {
+                left: 100%;
+            }
+        }
+        
+        .badge-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1.75rem;
+            font-weight: 800;
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 50%, #1a1a1a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Valero Badge - Blue tones */
+        .valero-badge {
+            background: linear-gradient(135deg, #d4e8f0 0%, #e8f4f8 50%, #d4e8f0 100%);
+            border: 2px solid rgba(168, 213, 226, 0.5);
+        }
+        
+        .valero-badge .badge-text {
+            background: linear-gradient(135deg, #2c5f7a 0%, #4a8ba8 50%, #2c5f7a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .valero-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 40px rgba(168, 213, 226, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.9),
+                inset 0 -2px 4px rgba(168, 213, 226, 0.2);
+        }
+        
+        /* Celopata Badge - Purple tones */
+        .celopata-badge {
+            background: linear-gradient(135deg, #f0d4e8 0%, #f8e8f4 50%, #f0d4e8 100%);
+            border: 2px solid rgba(221, 160, 221, 0.5);
+        }
+        
+        .celopata-badge .badge-text {
+            background: linear-gradient(135deg, #7a2c6f 0%, #a84a9e 50%, #7a2c6f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .celopata-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 40px rgba(221, 160, 221, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.9),
+                inset 0 -2px 4px rgba(221, 160, 221, 0.2);
+        }
+        
+        /* Responsive Badge Design */
+        @media (max-width: 768px) {
+            .brand-badge {
+                padding: 1.25rem 3rem;
+            }
+            
+            .badge-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .brand-badge {
+                padding: 1rem 2rem;
+            }
+            
+            .badge-text {
+                font-size: 1.25rem;
+            }
         }
         
         .coming-soon-text {
@@ -582,13 +749,163 @@
             }
         }
         
-        #shop-3d-canvas {
+        /* Floating Shapes Background */
+        .floating-shapes {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatShape 20s infinite ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #a8d5e2, #8ec5d6);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffb6c1, #ff9aa8);
+            top: 70%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+        
+        .shape-3 {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #dda0dd, #c080c0);
+            top: 15%;
+            right: 10%;
+            animation-delay: 4s;
+        }
+        
+        .shape-4 {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #a8d5e2, #7ab5c6);
+            top: 65%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+        
+        .shape-5 {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffb6c1, #dda0dd);
+            top: 40%;
+            left: 5%;
+            animation-delay: 3s;
+        }
+        
+        .shape-6 {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #c080c0, #a8d5e2);
+            top: 50%;
+            right: 5%;
+            animation-delay: 5s;
+        }
+        
+        @keyframes floatShape {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, -30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, -60px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-30px, -30px) rotate(270deg);
+            }
+        }
+        
+        /* CTA Icon */
+        .cta-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, #a8d5e2, #8ec5d6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(168, 213, 226, 0.4);
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+        
+        .cta-icon svg {
+            width: 40px;
+            height: 40px;
+            color: #ffffff;
+        }
+        
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(168, 213, 226, 0.4);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 15px 40px rgba(168, 213, 226, 0.6);
+            }
+        }
+        
+        /* CTA Button */
+        .shop-cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1.25rem 3rem;
+            background: linear-gradient(135deg, #a8d5e2, #8ec5d6);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 10px 30px rgba(168, 213, 226, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shop-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .shop-cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .shop-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(168, 213, 226, 0.5);
         }
         
         @media (max-width: 768px) {
@@ -681,7 +998,8 @@
             
             <!-- Category Pills -->
             <div class="hero-pills">
-                <span class="hero-pill">عطور</span>
+                <span class="hero-pill">شامبو</span>
+                <span class="hero-pill">بلسم</span>
                 <span class="hero-pill">صابون</span>
                 <span class="hero-pill">كريمات</span>
             </div>
@@ -714,7 +1032,12 @@
     <!-- Press Section -->
     <section class="press fade-in">
         <div class="press-wrapper">
-            <p class="press-text fade-in">متوفر في</p>
+            <div class="press-header-badge">
+                <div class="brand-badge press-badge">
+                    <div class="badge-shine"></div>
+                    <span class="badge-text">متوفر في</span>
+                </div>
+            </div>
             <div class="press-logos">
                 <a href="valero.html" class="press-logo-card">
                     <div class="press-logo-icon">
@@ -734,10 +1057,17 @@
         </div>
     </section>
 
-    <!-- Shop CTA Section with 3D -->
+    <!-- Shop CTA Section -->
     <section class="shop-cta-section fade-in">
         <div class="shop-cta-container">
-            <canvas id="shop-3d-canvas"></canvas>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+                <div class="shape shape-6"></div>
+            </div>
             <div class="shop-cta-content scale-in">
                 <div class="sparkle"></div>
                 <div class="sparkle"></div>
@@ -745,8 +1075,14 @@
                 <div class="sparkle"></div>
                 <div class="sparkle"></div>
                 <div class="sparkle"></div>
+                <div class="cta-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
                 <h2 class="shop-cta-title">اشتري اللي نفسك فيه</h2>
                 <p class="shop-cta-subtitle">منتجات عناية فاخرة بأسعار مناسبة</p>
+                <a href="valero.html" class="shop-cta-button">تسوق الآن</a>
             </div>
         </div>
     </section>
@@ -757,13 +1093,23 @@
             <h2 class="section-title fade-in">منتجاتنا</h2>
             
             <!-- Valero Products -->
-            <h3 class="products-subtitle fade-in">بعض منتجات فاليرو</h3>
+            <div class="brand-section-header fade-in">
+                <div class="brand-badge valero-badge">
+                    <div class="badge-shine"></div>
+                    <span class="badge-text">بعض منتجات فاليرو</span>
+                </div>
+            </div>
             <div class="products-grid" id="valeroProducts">
                 <div class="loading-text">جاري تحميل المنتجات...</div>
             </div>
             
             <!-- Celopata Products -->
-            <h3 class="products-subtitle fade-in" style="margin-top: 4rem;">بعض منتجات كليوباترا</h3>
+            <div class="brand-section-header fade-in" style="margin-top: 4rem;">
+                <div class="brand-badge celopata-badge">
+                    <div class="badge-shine"></div>
+                    <span class="badge-text">بعض منتجات كليوباترا</span>
+                </div>
+            </div>
             <p class="coming-soon-text fade-in">قريباً</p>
         </div>
     </section>
@@ -813,7 +1159,6 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 ELKAYAL. جميع الحقوق محفوظة.</p>
-                <p>&copy; صنع بواسطة ياسين محمد.</p>
             </div>
         </div>
     </footer>
@@ -931,325 +1276,6 @@
             });
         });
         
-        // Three.js 3D Shopping Cart Animation
-        let shopScene, shopCamera, shopRenderer;
-        let shoppingCart, products = [];
-        let angle = 0;
-        
-        function initShop3D() {
-            const canvas = document.getElementById('shop-3d-canvas');
-            const container = canvas.parentElement;
-            
-            // Scene setup
-            shopScene = new THREE.Scene();
-            
-            // Camera setup
-            shopCamera = new THREE.PerspectiveCamera(
-                60,
-                container.clientWidth / container.clientHeight,
-                0.1,
-                1000
-            );
-            shopCamera.position.z = 18;
-            shopCamera.position.y = 5;
-            shopCamera.lookAt(0, 2, 0);
-            
-            // Renderer setup
-            shopRenderer = new THREE.WebGLRenderer({
-                canvas: canvas,
-                alpha: true,
-                antialias: true
-            });
-            shopRenderer.setSize(container.clientWidth, container.clientHeight);
-            shopRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            
-            // Lighting - إضاءة محسّنة
-            const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-            shopScene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
-            directionalLight.position.set(5, 15, 10);
-            directionalLight.castShadow = true;
-            shopScene.add(directionalLight);
-            
-            const pointLight1 = new THREE.PointLight(0xa8d5e2, 2, 80);
-            pointLight1.position.set(-15, 8, 8);
-            shopScene.add(pointLight1);
-            
-            const pointLight2 = new THREE.PointLight(0xffb6c1, 2, 80);
-            pointLight2.position.set(15, 8, 8);
-            shopScene.add(pointLight2);
-            
-            const pointLight3 = new THREE.PointLight(0xdda0dd, 1.5, 60);
-            pointLight3.position.set(0, 10, -10);
-            shopScene.add(pointLight3);
-            
-            // Create shopping cart
-            createShoppingCart();
-            
-            // Create product items
-            createProductItems();
-            
-            // Handle resize
-            window.addEventListener('resize', onShopResize);
-            
-            // Start animation
-            animateShop();
-        }
-        
-        function createShoppingCart() {
-            const cartGroup = new THREE.Group();
-            
-            // Cart body (basket) - جودة أعلى
-            const basketGeometry = new THREE.BoxGeometry(2.5, 2, 2, 32, 32, 32);
-            const basketMaterial = new THREE.MeshStandardMaterial({
-                color: 0xa8d5e2,
-                transparent: true,
-                opacity: 0.95,
-                metalness: 0.3,
-                roughness: 0.2,
-                emissive: 0xa8d5e2,
-                emissiveIntensity: 0.3
-            });
-            const basket = new THREE.Mesh(basketGeometry, basketMaterial);
-            basket.position.y = 1;
-            basket.castShadow = true;
-            basket.receiveShadow = true;
-            
-            // Cart grid pattern - شبكة واقعية
-            const gridGroup = new THREE.Group();
-            for (let i = 0; i < 5; i++) {
-                const lineGeometry = new THREE.BoxGeometry(2.6, 0.05, 0.05);
-                const lineMaterial = new THREE.MeshStandardMaterial({
-                    color: 0x7ab5c6,
-                    metalness: 0.5,
-                    roughness: 0.3
-                });
-                const line = new THREE.Mesh(lineGeometry, lineMaterial);
-                line.position.y = 0.2 + i * 0.4;
-                gridGroup.add(line);
-            }
-            gridGroup.position.y = 1;
-            
-            // Cart sides - جوانب العربة
-            const sideGeometry = new THREE.BoxGeometry(0.1, 2, 2, 16, 16, 16);
-            const sideMaterial = new THREE.MeshStandardMaterial({
-                color: 0x8ec5d6,
-                metalness: 0.4,
-                roughness: 0.3,
-                emissive: 0x8ec5d6,
-                emissiveIntensity: 0.2
-            });
-            
-            const leftSide = new THREE.Mesh(sideGeometry, sideMaterial);
-            leftSide.position.set(-1.3, 1, 0);
-            
-            const rightSide = new THREE.Mesh(sideGeometry, sideMaterial);
-            rightSide.position.set(1.3, 1, 0);
-            
-            // Cart handle - مقبض محسّن
-            const handleGroup = new THREE.Group();
-            const handleBarGeometry = new THREE.CylinderGeometry(0.08, 0.08, 2.5, 32);
-            const handleBarMaterial = new THREE.MeshStandardMaterial({
-                color: 0x7ab5c6,
-                metalness: 0.7,
-                roughness: 0.2
-            });
-            const handleBar = new THREE.Mesh(handleBarGeometry, handleBarMaterial);
-            handleBar.rotation.z = Math.PI / 2;
-            handleBar.position.y = 2.5;
-            
-            const handleGripGeometry = new THREE.TorusGeometry(0.15, 0.08, 16, 100);
-            const handleGrip1 = new THREE.Mesh(handleGripGeometry, handleBarMaterial);
-            handleGrip1.position.set(-1, 2.5, 0);
-            handleGrip1.rotation.y = Math.PI / 2;
-            
-            const handleGrip2 = new THREE.Mesh(handleGripGeometry, handleBarMaterial);
-            handleGrip2.position.set(1, 2.5, 0);
-            handleGrip2.rotation.y = Math.PI / 2;
-            
-            handleGroup.add(handleBar);
-            handleGroup.add(handleGrip1);
-            handleGroup.add(handleGrip2);
-            
-            // Cart wheels - عجلات محسّنة
-            const wheelGroup = new THREE.Group();
-            const wheelGeometry = new THREE.CylinderGeometry(0.35, 0.35, 0.25, 32);
-            const wheelMaterial = new THREE.MeshStandardMaterial({
-                color: 0x2a2a2a,
-                metalness: 0.6,
-                roughness: 0.4
-            });
-            
-            const tireMaterial = new THREE.MeshStandardMaterial({
-                color: 0x1a1a1a,
-                metalness: 0.3,
-                roughness: 0.8
-            });
-            
-            // Create 4 wheels with details
-            const wheelPositions = [
-                [-0.9, -0.8, 1],
-                [0.9, -0.8, 1],
-                [-0.9, -0.8, -1],
-                [0.9, -0.8, -1]
-            ];
-            
-            wheelPositions.forEach(pos => {
-                const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
-                wheel.position.set(pos[0], pos[1], pos[2]);
-                wheel.rotation.z = Math.PI / 2;
-                wheel.castShadow = true;
-                
-                // Tire detail
-                const tireGeometry = new THREE.TorusGeometry(0.35, 0.08, 16, 32);
-                const tire = new THREE.Mesh(tireGeometry, tireMaterial);
-                tire.position.set(pos[0], pos[1], pos[2]);
-                tire.rotation.y = Math.PI / 2;
-                
-                wheelGroup.add(wheel);
-                wheelGroup.add(tire);
-            });
-            
-            // Bottom plate
-            const plateGeometry = new THREE.BoxGeometry(2.8, 0.15, 2.2, 16, 16, 16);
-            const plateMaterial = new THREE.MeshStandardMaterial({
-                color: 0x9ec5d6,
-                metalness: 0.5,
-                roughness: 0.3
-            });
-            const plate = new THREE.Mesh(plateGeometry, plateMaterial);
-            plate.position.y = -0.1;
-            
-            cartGroup.add(basket);
-            cartGroup.add(gridGroup);
-            cartGroup.add(leftSide);
-            cartGroup.add(rightSide);
-            cartGroup.add(handleGroup);
-            cartGroup.add(wheelGroup);
-            cartGroup.add(plate);
-            
-            cartGroup.scale.set(1.2, 1.2, 1.2); // تكبير العربة
-            
-            shoppingCart = cartGroup;
-            shopScene.add(shoppingCart);
-        }
-        
-        function createProductItems() {
-            // Product bottle 1
-            const bottle1Geometry = new THREE.CylinderGeometry(0.4, 0.5, 1.5, 32);
-            const bottle1Material = new THREE.MeshPhongMaterial({
-                color: 0xffb6c1,
-                transparent: true,
-                opacity: 0.85,
-                shininess: 120,
-                emissive: 0xffb6c1,
-                emissiveIntensity: 0.15
-            });
-            const bottle1 = new THREE.Mesh(bottle1Geometry, bottle1Material);
-            products.push(bottle1);
-            shopScene.add(bottle1);
-            
-            // Product bottle 2
-            const bottle2Geometry = new THREE.CylinderGeometry(0.35, 0.4, 1.2, 32);
-            const bottle2Material = new THREE.MeshPhongMaterial({
-                color: 0xdda0dd,
-                transparent: true,
-                opacity: 0.85,
-                shininess: 120,
-                emissive: 0xdda0dd,
-                emissiveIntensity: 0.15
-            });
-            const bottle2 = new THREE.Mesh(bottle2Geometry, bottle2Material);
-            products.push(bottle2);
-            shopScene.add(bottle2);
-            
-            // Product sphere (cream jar)
-            const sphereGeometry = new THREE.SphereGeometry(0.6, 32, 32);
-            const sphereMaterial = new THREE.MeshPhongMaterial({
-                color: 0xffc0cb,
-                transparent: true,
-                opacity: 0.8,
-                shininess: 120,
-                emissive: 0xffc0cb,
-                emissiveIntensity: 0.15
-            });
-            const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-            products.push(sphere);
-            shopScene.add(sphere);
-            
-            // Product box
-            const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-            const boxMaterial = new THREE.MeshPhongMaterial({
-                color: 0xe6b8e6,
-                transparent: true,
-                opacity: 0.8,
-                shininess: 100,
-                emissive: 0xe6b8e6,
-                emissiveIntensity: 0.15
-            });
-            const box = new THREE.Mesh(boxGeometry, boxMaterial);
-            products.push(box);
-            shopScene.add(box);
-        }
-        
-        function onShopResize() {
-            const container = document.querySelector('.shop-cta-container');
-            shopCamera.aspect = container.clientWidth / container.clientHeight;
-            shopCamera.updateProjectionMatrix();
-            shopRenderer.setSize(container.clientWidth, container.clientHeight);
-        }
-        
-        function animateShop() {
-            requestAnimationFrame(animateShop);
-            
-            angle += 0.008;
-            
-            // Move shopping cart on the edges (above the text)
-            const cartRadius = 10;
-            const cartHeight = 3; // فوق النص
-            shoppingCart.position.x = Math.cos(angle) * cartRadius;
-            shoppingCart.position.z = Math.sin(angle) * cartRadius;
-            shoppingCart.position.y = cartHeight + Math.sin(angle * 2) * 0.8;
-            
-            // Make cart face the direction of movement
-            shoppingCart.rotation.y = -angle + Math.PI / 2;
-            
-            // Rotate cart slightly for dynamic effect
-            shoppingCart.rotation.z = Math.sin(angle * 2) * 0.08;
-            shoppingCart.rotation.x = Math.cos(angle * 1.5) * 0.05;
-            
-            // Rotate wheels
-            const wheels = shoppingCart.children.filter(child => 
-                child.geometry && child.geometry.type === 'CylinderGeometry'
-            );
-            wheels.forEach(wheel => {
-                wheel.rotation.x += 0.1;
-            });
-            
-            // Animate products around the scene (closer to edges)
-            products.forEach((product, index) => {
-                const productAngle = angle * 0.7 + (index * Math.PI / 2);
-                const radius = 7 + index * 0.8;
-                
-                product.position.x = Math.cos(productAngle) * radius;
-                product.position.z = Math.sin(productAngle) * radius;
-                product.position.y = 2 + Math.sin(angle * 3 + index) * 2;
-                
-                // Rotate products
-                product.rotation.y += 0.025;
-                product.rotation.x += 0.015;
-            });
-            
-            shopRenderer.render(shopScene, shopCamera);
-        }
-        
-        // Initialize 3D shop animation when DOM is loaded
-        if (typeof THREE !== 'undefined') {
-            document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(initShop3D, 500); // Small delay to ensure container is ready
-            });
-        }
     </script>
 </body>
 </html>
