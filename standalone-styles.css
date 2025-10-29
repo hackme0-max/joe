@@ -359,7 +359,13 @@ body {
     margin: 0 auto;
     padding: 4rem 3rem;
     border-radius: 2rem;
-    background: linear-gradient(135deg, rgba(168, 213, 226, 0.08) 0%, rgba(142, 197, 214, 0.12) 100%);
+    background: linear-gradient(135deg, 
+    #d8edf3,   /* أفتح من #a8d5e2 */
+    #c5e3eb,   /* أفتح من #8ec5d6 */
+    #ffdce1,   /* أفتح من #ffb6c1 */
+    #eed2ee    /* أفتح من #dda0dd */
+  );
+    /* background: linear-gradient(135deg, rgba(168, 213, 226, 0.08) 0%, rgba(142, 197, 214, 0.12) 100%); */
     text-align: center;
     border: 2px solid rgba(168, 213, 226, 0.2);
     box-shadow: 0 10px 40px rgba(168, 213, 226, 0.15);
@@ -409,6 +415,52 @@ body {
     background: linear-gradient(90deg, #a8d5e2, #8ec5d6);
     border-radius: 2px;
     box-shadow: 0 2px 10px rgba(168, 213, 226, 0.5);
+}
+
+/* Press Badge - Modern Metallic Design */
+.press-header-badge {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.press-badge {
+    background: linear-gradient(135deg, 
+        #e8f4f8 0%, 
+        #f0f8fb 50%, 
+        #e8f4f8 100%
+    );
+    border: 2px solid rgba(168, 213, 226, 0.4);
+    padding: 1.25rem 3.5rem;
+}
+
+.press-badge::before {
+    background: linear-gradient(
+        135deg,
+        rgba(168, 213, 226, 0.3) 0%,
+        transparent 50%,
+        rgba(142, 197, 214, 0.2) 100%
+    );
+}
+
+.press-badge .badge-text {
+    font-size: 2rem;
+    background: linear-gradient(135deg, 
+        #2c5f7a 0%, 
+        #4a8ba8 50%, 
+        #2c5f7a 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.press-badge:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 15px 45px rgba(168, 213, 226, 0.35),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 4px rgba(168, 213, 226, 0.25);
 }
 
 .press-logos {
@@ -812,6 +864,18 @@ body {
         font-size: 2rem;
         margin-bottom: 2.5rem;
     }
+    
+    .press-badge {
+        padding: 1rem 2.5rem;
+    }
+    
+    .press-badge .badge-text {
+        font-size: 1.75rem;
+    }
+    
+    .press-header-badge {
+        margin-bottom: 2.5rem;
+    }
 
     .press-logos {
         gap: 2rem;
@@ -988,6 +1052,18 @@ body {
         width: 60px;
         height: 3px;
         bottom: -12px;
+    }
+    
+    .press-badge {
+        padding: 0.875rem 2rem;
+    }
+    
+    .press-badge .badge-text {
+        font-size: 1.5rem;
+    }
+    
+    .press-header-badge {
+        margin-bottom: 2rem;
     }
 
     .press-logos {
