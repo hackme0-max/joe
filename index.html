@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELKAYAL -  Store</title>
+    <meta name="description" content="ELKAYAL علامة تجارية للعناية الشخصية.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="standalone-styles.css">
+    <script src="cart-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+        }
+        
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Decorative Background Elements */
+        .decorative-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.03;
+            animation: float-random 20s infinite ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #a8d5e2, #8ec5d6);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+            top: 60%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+        
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #dda0dd, #e6b8e6);
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 6s;
+        }
+        
+        @keyframes float-random {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, -30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(-20px, 20px) rotate(180deg);
+            }
+            75% {
+                transform: translate(20px, 30px) rotate(270deg);
+            }
+        }
+        
+        /* Enhanced Section Styles */
+        section {
+            position: relative;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #a8d5e2, #8ec5d6);
+            border-radius: 2px;
+        }
+        
+        /* Products Section Styles */
+        .products-subtitle {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #262626;
+            text-align: center;
+            margin: 2rem 0 2rem 0;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        /* Brand Badge - Modern Metallic Design */
+        .brand-section-header {
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0 2rem 0;
+        }
+        
+        .brand-badge {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 4rem;
+            background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e8e8e8 100%);
+            border-radius: 50px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brand-badge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.4) 0%,
+                transparent 50%,
+                rgba(0, 0, 0, 0.05) 100%
+            );
+            border-radius: 50px;
+        }
+        
+        .brand-badge::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        
+        .brand-badge:hover::after {
+            opacity: 1;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+        
+        .badge-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent
+            );
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            50%, 100% {
+                left: 100%;
+            }
+        }
+        
+        .badge-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1.75rem;
+            font-weight: 800;
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 50%, #1a1a1a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Valero Badge - Blue tones */
+        .valero-badge {
+            background: linear-gradient(135deg, #d4e8f0 0%, #e8f4f8 50%, #d4e8f0 100%);
+            border: 2px solid rgba(168, 213, 226, 0.5);
+        }
+        
+        .valero-badge .badge-text {
+            background: linear-gradient(135deg, #2c5f7a 0%, #4a8ba8 50%, #2c5f7a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .valero-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 40px rgba(168, 213, 226, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.9),
+                inset 0 -2px 4px rgba(168, 213, 226, 0.2);
+        }
+        
+        /* Celopata Badge - Purple tones */
+        .celopata-badge {
+            background: linear-gradient(135deg, #f0d4e8 0%, #f8e8f4 50%, #f0d4e8 100%);
+            border: 2px solid rgba(221, 160, 221, 0.5);
+        }
+        
+        .celopata-badge .badge-text {
+            background: linear-gradient(135deg, #7a2c6f 0%, #a84a9e 50%, #7a2c6f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .celopata-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 40px rgba(221, 160, 221, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.9),
+                inset 0 -2px 4px rgba(221, 160, 221, 0.2);
+        }
+        
+        /* Responsive Badge Design */
+        @media (max-width: 768px) {
+            .brand-badge {
+                padding: 1.25rem 3rem;
+            }
+            
+            .badge-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .brand-badge {
+                padding: 1rem 2rem;
+            }
+            
+            .badge-text {
+                font-size: 1.25rem;
+            }
+        }
+        
+        .coming-soon-text {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #737373;
+            text-align: center;
+            margin: 2rem 0;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .loading-text {
+            text-align: center;
+            padding: 2rem;
+            color: #737373;
+            font-size: 1.125rem;
+        }
+        
+        .product-name {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Enhanced Press Section Styles */
+        .press-logo-card {
+            /* background: #ffffff; */
+            /* border-radius: 2rem; */
+            /* padding: 2.5rem; */
+            text-align: center;
+            transition: all 0.4s ease;
+            /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); */
+            /* border: 2px solid transparent; */
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .press-logo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border-color: #a8d5e2;
+        }
+        
+        .press-logo-icon {
+            width: 120px;
+            height: 120px;
+            /* border-radius: 1.5rem; */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            /* padding: 1rem; */
+        }
+        
+        .press-logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .press-logo-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #262626;
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .press-logo-desc {
+            font-size: 1rem;
+            color: #737373;
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        /* Enhanced Hover Effects */
+        .hero-product-card-small {
+            transition: all 0.4s ease;
+        }
+        
+        .hero-product-card-small:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-product-card-large {
+            transition: all 0.4s ease;
+        }
+        
+        .hero-product-card-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-arrow {
+            transition: all 0.3s ease;
+        }
+        
+        .hero-product-card-large:hover .card-arrow {
+            transform: translateX(-5px);
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Cart icon animation */
+        .cart-btn svg {
+            transition: transform 0.3s ease;
+        }
+        
+        .cart-btn:hover svg {
+            transform: scale(1.2) translateY(-2px);
+        }
+        
+        /* Product card enhanced animation */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Button hover effects */
+        .add-to-cart-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .add-to-cart-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .mission-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .mission-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .mission-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Mission image hover effect */
+        .mission-image {
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .mission-image img {
+            transition: transform 0.6s ease;
+        }
+        
+        .mission-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Footer link hover effect */
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a8d5e2;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero section subtle animation */
+        .hero-wrapper {
+            animation: subtle-pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes subtle-pulse {
+            0%, 100% {
+                box-shadow: 0 10px 40px rgba(168, 213, 226, 0.3);
+            }
+            50% {
+                box-shadow: 0 15px 60px rgba(168, 213, 226, 0.4);
+            }
+        }
+        
+        /* Press section enhancement */
+        .press {
+            background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+            padding: 4rem 0;
+        }
+        
+        /* All products section background */
+        .all-products {
+            background: #ffffff;
+        }
+        
+        /* Mission section background */
+        .mission {
+            background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+        }
+        
+        /* Shop CTA Section with 3D */
+        .shop-cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f8fbfc 0%, #ffffff 50%, #f8fbfc 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shop-cta-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .shop-cta-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 60px rgba(168, 213, 226, 0.2);
+            border: 2px solid rgba(168, 213, 226, 0.3);
+            overflow: visible;
+        }
+        
+        /* Animated particles around text */
+        .shop-cta-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 213, 226, 0.15) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: particleMove 20s linear infinite;
+            pointer-events: none;
+        }
+        
+        .shop-cta-content::after {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 2rem;
+            background: linear-gradient(45deg, 
+                rgba(168, 213, 226, 0.3),
+                rgba(255, 182, 193, 0.3),
+                rgba(221, 160, 221, 0.3),
+                rgba(168, 213, 226, 0.3)
+            );
+            background-size: 300% 300%;
+            animation: gradientShift 8s ease infinite;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.6;
+        }
+        
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(50px, 50px) rotate(360deg);
+            }
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        /* Floating sparkles */
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(168, 213, 226, 0.8), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleFloat 4s ease-in-out infinite;
+        }
+        
+        .sparkle:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .sparkle:nth-child(2) {
+            top: 60%;
+            left: 15%;
+            animation-delay: 1s;
+        }
+        
+        .sparkle:nth-child(3) {
+            top: 30%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .sparkle:nth-child(4) {
+            top: 70%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+        
+        .sparkle:nth-child(5) {
+            top: 10%;
+            left: 50%;
+            animation-delay: 1.5s;
+        }
+        
+        .sparkle:nth-child(6) {
+            bottom: 10%;
+            left: 50%;
+            animation-delay: 2.5s;
+        }
+        
+        @keyframes sparkleFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-30px) scale(1.5);
+                opacity: 1;
+            }
+        }
+        
+        .shop-cta-title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #a8d5e2 0%, #8ec5d6 50%, #7ab5c6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(168, 213, 226, 0.3);
+            animation: titlePulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.02);
+                filter: brightness(1.1);
+            }
+        }
+        
+        .shop-cta-subtitle {
+            font-size: 1.5rem;
+            color: #737373;
+            font-weight: 500;
+            margin-top: 1rem;
+            font-family: 'Tajawal', sans-serif;
+            position: relative;
+            z-index: 1;
+            animation: subtitleWave 4s ease-in-out infinite;
+        }
+        
+        @keyframes subtitleWave {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+        }
+        
+        /* Floating Shapes Background */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatShape 20s infinite ease-in-out;
+        }
+        
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #a8d5e2, #8ec5d6);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ffb6c1, #ff9aa8);
+            top: 70%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+        
+        .shape-3 {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #dda0dd, #c080c0);
+            top: 15%;
+            right: 10%;
+            animation-delay: 4s;
+        }
+        
+        .shape-4 {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #a8d5e2, #7ab5c6);
+            top: 65%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+        
+        .shape-5 {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffb6c1, #dda0dd);
+            top: 40%;
+            left: 5%;
+            animation-delay: 3s;
+        }
+        
+        .shape-6 {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #c080c0, #a8d5e2);
+            top: 50%;
+            right: 5%;
+            animation-delay: 5s;
+        }
+        
+        @keyframes floatShape {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, -30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, -60px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-30px, -30px) rotate(270deg);
+            }
+        }
+        
+        /* CTA Icon */
+        .cta-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, #a8d5e2, #8ec5d6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(168, 213, 226, 0.4);
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+        
+        .cta-icon svg {
+            width: 40px;
+            height: 40px;
+            color: #ffffff;
+        }
+        
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(168, 213, 226, 0.4);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 15px 40px rgba(168, 213, 226, 0.6);
+            }
+        }
+        
+        /* CTA Button */
+        .shop-cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1.25rem 3rem;
+            background: linear-gradient(135deg, #a8d5e2, #8ec5d6);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 10px 30px rgba(168, 213, 226, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shop-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .shop-cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .shop-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(168, 213, 226, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .shop-cta-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .shop-cta-container {
+                min-height: 350px;
+            }
+            
+            .shop-cta-content {
+                padding: 2rem;
+            }
+            
+            .shop-cta-title {
+                font-size: 2.5rem;
+            }
+            
+            .shop-cta-subtitle {
+                font-size: 1.125rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .shop-cta-section {
+                padding: 3rem 1rem;
+            }
+            
+            .shop-cta-container {
+                min-height: 300px;
+            }
+            
+            .shop-cta-content {
+                padding: 1.5rem;
+            }
+            
+            .shop-cta-title {
+                font-size: 2rem;
+            }
+            
+            .shop-cta-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative Background -->
+    <div class="decorative-bg">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">ELKAYAL</div>
+                <nav class="nav">
+                    <a href="valero.html" class="nav-link">المتجر</a>
+                    <a href="#" class="nav-link">من نحن</a>
+                    <a href="#" class="nav-link">الاستدامة</a>
+                    <a href="#" class="nav-link">تواصل معنا</a>
+                </nav>
+                <button class="cart-btn" onclick="window.location.href='cart.html'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px; vertical-align: middle;">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    السلة (0)
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-wrapper">
+            <div class="hero-background">
+                <img src="images/demo1.png" alt="ELKAYAL - Your daily adventure partners" class="hero-bg-image">
+            </div>
+            
+            <!-- Hero Text Overlay -->
+            <div class="hero-text-overlay">
+                <h1 class="hero-main-title">اكتشف مغامرتك <br>القادمة</h1>
+            </div>
+            
+            <!-- Category Pills -->
+            <div class="hero-pills">
+                <span class="hero-pill">شامبو</span>
+                <span class="hero-pill">بلسم</span>
+                <span class="hero-pill">حمام كريم</span>
+            </div>
+            
+            <!-- Small Product Card (Bottom Left) -->
+            <div class="hero-product-card-small">
+                <div class="small-card-image">
+                    <img src="images/hand-cream.png" alt="Hand Cream">
+                </div>
+                <div class="small-card-text">
+                    <h3>كريمات اليدين</h3>
+                    <p>ناعمة بشكل لا يصدق<br>غنية بالفيتامينات</p>
+                </div>
+            </div>
+            
+            <!-- Featured Product Card (Right) -->
+            <div class="hero-product-card-large">
+                <div class="large-card-header">
+                    <span class="card-label">هير فود</span>
+                    <h2 class="card-title">زيت الزيتون الطبيعي<br>هير فود.</h2>
+                    <button class="card-arrow">←</button>
+                </div>
+                <div class="large-card-image">
+                    <img src="images/cream-blue.png" alt="Hand Cream Fig Fizz">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section class="press fade-in">
+        <div class="press-wrapper">
+            <div class="press-header-badge">
+                <div class="brand-badge press-badge">
+                    <div class="badge-shine"></div>
+                    <span class="badge-text">متوفر في</span>
+                </div>
+            </div>
+            <div class="press-logos">
+                <a href="valero.html" class="press-logo-card">
+                    <div class="press-logo-icon">
+                        <img src="images/logo_v.png" alt="Valero Logo">
+                    </div>
+                    <h3 class="press-logo-name">ڤاليرو</h3>
+                    <p class="press-logo-desc">عرض المنتجات</p>
+                </a>
+                <a href="celopata.html" class="press-logo-card">
+                    <div class="press-logo-icon">
+                        <img src="images/logo_c.png" alt="Celopata Logo">
+                    </div>
+                    <h3 class="press-logo-name">كليوباترا</h3>
+                    <p class="press-logo-desc">قريباً</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop CTA Section -->
+    <section class="shop-cta-section fade-in">
+        <div class="shop-cta-container">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+                <div class="shape shape-6"></div>
+            </div>
+            <div class="shop-cta-content scale-in">
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="sparkle"></div>
+                <div class="cta-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <h2 class="shop-cta-title">اشتري اللي نفسك فيه</h2>
+                <p class="shop-cta-subtitle">منتجات عناية فاخرة بأسعار مناسبة</p>
+                <a href="valero.html" class="shop-cta-button">تسوق الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Products -->
+    <section class="all-products fade-in">
+        <div class="container">
+            <h2 class="section-title fade-in">منتجاتنا</h2>
+            
+            <!-- Valero Products -->
+            <div class="brand-section-header fade-in">
+                <div class="brand-badge valero-badge">
+                    <div class="badge-shine"></div>
+                    <span class="badge-text">بعض منتجات ڤاليرو</span>
+                </div>
+            </div>
+            <div class="products-grid" id="valeroProducts">
+                <div class="loading-text">جاري تحميل المنتجات...</div>
+            </div>
+            
+            <!-- Celopata Products -->
+            <div class="brand-section-header fade-in" style="margin-top: 4rem;">
+                <div class="brand-badge celopata-badge">
+                    <div class="badge-shine"></div>
+                    <span class="badge-text">بعض منتجات كليوباترا</span>
+                </div>
+            </div>
+            <p class="coming-soon-text fade-in">قريباً</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission fade-in">
+        <div class="container">
+            <div class="mission-content">
+                <div class="mission-image slide-in-left">
+                    <img src="images/skincare-routine.jpg" alt="Skincare routine">
+                </div>
+                <div class="mission-text slide-in-right">
+                    <h2 class="mission-title">بناء مستقبل أفضل</h2>
+                    <p class="mission-description">في ELKAYAL، نؤمن بإنتاج منتجات مفيدة لك وللكوكب. التزامنا بالاستدامة يقود كل ما نقوم به، من مصادر المكونات إلى تصميم العبوات.</p>
+                    <button class="mission-btn">اعرف المزيد</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">ELKAYAL</h3>
+                    <p class="footer-text">منتجات عناية شخصية تصنع الفرق</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">المتجر</h4>
+                    <a href="valero.html" class="footer-link">جميع المنتجات</a>
+                    <a href="#" class="footer-link">الأكثر مبيعاً</a>
+                    <a href="#" class="footer-link">المنتجات الجديدة</a>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">تابعنا</h4>
+                    <a href="https://www.instagram.com/valero_cosmetics?igsh=aGhnOGlvZ3hqYXRu" target="_blank" class="footer-link">إنستجرام</a>
+                    <a href="https://www.facebook.com/share/1DJQWFZXCG/" target="_blank" class="footer-link">فيسبوك</a>
+                    <a href="tel:01028498742" class="footer-link">📞 01028498742</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ELKAYAL. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Embedded products data as fallback
+        const productsData = {
+            "products": [
+                {
+                    "id": 1,
+                    "name": "كريم سنفره للوجه و الجسم بالليمون الاحمر و المندرين",
+                    "image": "https://i.ibb.co/XZgMrS3X/image.png",
+                    "price": 45,
+                    "description": "✨ بشرتك تستحق العناية الفائقة! ✨  \nجربي الآن ماسك السنفرة للوجه للحصول على بشرة ناعمة ونقية من أول استخدام!\n\n🔹 فوائد المنتج:\n1. يزيل خلايا الجلد الميتة بلطف ويمنح بشرتك إشراقة فورية.\n2. ينظف المسام بعمق ويقلل من ظهور الرؤوس السوداء.\n3. يرطب البشرة ويجعلها أكثر نعومة وحيوية."
+                },
+                {
+                    "id": 2,
+                    "name": "كريم سنفره للوجه والجسم بالفراوله",
+                    "image": "https://i.ibb.co/PvBqxZ48/image.png",
+                    "price": 45,
+                    "description": "✨ بشرتك تستحق العناية الفائقة! ✨  \nجربي الآن ماسك السنفرة للوجه للحصول على بشرة ناعمة ونقية من أول استخدام!\n\n🔹 فوائد المنتج:\n1. يزيل خلايا الجلد الميتة بلطف ويمنح بشرتك إشراقة فورية.\n2. ينظف المسام بعمق ويقلل من ظهور الرؤوس السوداء.\n3. يرطب البشرة ويجعلها أكثر نعومة وحيوية."
+                },
+                {
+                    "id": 3,
+                    "name": "كريم سنفره للوجه و الجسم بالتوت البري",
+                    "image": "https://i.ibb.co/gMJ3hWRM/image.png",
+                    "price": 45,
+                    "description": "✨ بشرتك تستحق العناية الفائقة! ✨  \nجربي الآن ماسك السنفرة للوجه للحصول على بشرة ناعمة ونقية من أول استخدام!\n\n🔹 فوائد المنتج:\n1. يزيل خلايا الجلد الميتة بلطف ويمنح بشرتك إشراقة فورية.\n2. ينظف المسام بعمق ويقلل من ظهور الرؤوس السوداء.\n3. يرطب البشرة ويجعلها أكثر نعومة وحيوية."
+                },{
+                "id": 15,
+                "name": "شامبو الكرياتين و البروتين",
+                "image": "https://i.ibb.co/QL1Njfw/1.jpg",
+                "price": 65,
+                "description": "💧 شامبو فاليرو – نعومة ولمعان من أول غسلة\nامنحي شعرك عناية فاخرة مع شامبو فاليرو، بتركيبته الغنية بالمكونات الطبيعية التي تنظف فروة الرأس بلطف وتغذي الشعر من الجذور حتى الأطراف.\nيمنحك شعراً قوياً، لامعاً، وحريرياً الملمس كأنه عائد للحياة من جديد!\n\n🌿 الخصائص والمميزات:\n• ينظف بعمق دون أن يسبب جفافاً أو تساقطاً.\n• غني بخلاصات طبيعية مثل [زيت الأرغان / الكيراتين / جوز الهند] لترميم الشعر التالف.\n• يمنح الشعر ترطيباً مكثفاً ويقلل من الهيشان.\n• يحافظ على لون الشعر المصبوغ ولمعانه الطبيعي.\n• مناسب للاستخدام اليومي ولجميع أنواع الشعر.\n\n✨ طريقة الاستخدام:\n1. بلّلي الشعر جيداً بالماء.\n2. ضعي كمية مناسبة من شامبو فاليرو ودلّكي فروة الرأس حتى تتكوّن رغوة غنية.\n3. اشطفي الشعر جيداً وكرّري عند الحاجة.\n4. للحصول على أفضل النتائج، استخدميه مع حمّام الكريم أو البلسم من فاليرو.\n\n🌸 النتيجة:\nشعر نظيف، ناعم، ومفعم بالحيوية بفضل تركيبة فاليرو المميزة."
+                },{
+                "id": 16,
+                "name": "شامبو بزيت الارجان و المكاديما",
+                "image": "https://i.ibb.co/Jj6JCGDk/2.jpg",
+                "price": 65,
+                "description": "💧 شامبو فاليرو – نعومة ولمعان من أول غسلة\nامنحي شعرك عناية فاخرة مع شامبو فاليرو، بتركيبته الغنية بالمكونات الطبيعية التي تنظف فروة الرأس بلطف وتغذي الشعر من الجذور حتى الأطراف.\nيمنحك شعراً قوياً، لامعاً، وحريرياً الملمس كأنه عائد للحياة من جديد!\n\n🌿 الخصائص والمميزات:\n• ينظف بعمق دون أن يسبب جفافاً أو تساقطاً.\n• غني بخلاصات طبيعية مثل [زيت الأرغان / الكيراتين / جوز الهند] لترميم الشعر التالف.\n• يمنح الشعر ترطيباً مكثفاً ويقلل من الهيشان.\n• يحافظ على لون الشعر المصبوغ ولمعانه الطبيعي.\n• مناسب للاستخدام اليومي ولجميع أنواع الشعر.\n\n✨ طريقة الاستخدام:\n1. بلّلي الشعر جيداً بالماء.\n2. ضعي كمية مناسبة من شامبو فاليرو ودلّكي فروة الرأس حتى تتكوّن رغوة غنية.\n3. اشطفي الشعر جيداً وكرّري عند الحاجة.\n4. للحصول على أفضل النتائج، استخدميه مع حمّام الكريم أو البلسم من فاليرو.\n\n🌸 النتيجة:\nشعر نظيف، ناعم، ومفعم بالحيوية بفضل تركيبة فاليرو المميزة."
+                },
+                {
+                "id": 17,
+                "name": "شامبو بزيت زبده الشيا و جوز الهند",
+                "image": "https://i.ibb.co/rfmgDpsd/3.jpg",
+                "price": 65,
+                "description": "💧 شامبو فاليرو – نعومة ولمعان من أول غسلة\nامنحي شعرك عناية فاخرة مع شامبو فاليرو، بتركيبته الغنية بالمكونات الطبيعية التي تنظف فروة الرأس بلطف وتغذي الشعر من الجذور حتى الأطراف.\nيمنحك شعراً قوياً، لامعاً، وحريرياً الملمس كأنه عائد للحياة من جديد!\n\n🌿 الخصائص والمميزات:\n• ينظف بعمق دون أن يسبب جفافاً أو تساقطاً.\n• غني بخلاصات طبيعية مثل [زيت الأرغان / الكيراتين / جوز الهند] لترميم الشعر التالف.\n• يمنح الشعر ترطيباً مكثفاً ويقلل من الهيشان.\n• يحافظ على لون الشعر المصبوغ ولمعانه الطبيعي.\n• مناسب للاستخدام اليومي ولجميع أنواع الشعر.\n\n✨ طريقة الاستخدام:\n1. بلّلي الشعر جيداً بالماء.\n2. ضعي كمية مناسبة من شامبو فاليرو ودلّكي فروة الرأس حتى تتكوّن رغوة غنية.\n3. اشطفي الشعر جيداً وكرّري عند الحاجة.\n4. للحصول على أفضل النتائج، استخدميه مع حمّام الكريم أو البلسم من فاليرو.\n\n🌸 النتيجة:\nشعر نظيف، ناعم، ومفعم بالحيوية بفضل تركيبة فاليرو المميزة."
+                }
+            ]
+        };
+
+        // Load Valero products from JSON with fallback
+        async function loadValeroProducts() {
+            let products;
+            
+            try {
+                // Try to fetch from JSON file first
+                const response = await fetch('product/store/products_valero.json');
+                if (!response.ok) throw new Error('Failed to fetch');
+                const data = await response.json();
+                products = data.products.slice(0, 3);
+                console.log('Products loaded from JSON file');
+            } catch (error) {
+                // Fallback to embedded data if fetch fails
+                console.log('Using embedded products data');
+                products = productsData.products;
+            }
+            
+            // Store products in localStorage for product page access
+            localStorage.setItem('valero_products', JSON.stringify(products));
+            
+            const container = document.getElementById('valeroProducts');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.style.cursor = 'pointer';
+                productCard.onclick = () => window.location.href = `product.html?id=${product.id}`;
+                
+                // Truncate description
+                const shortDescription = product.description.split('\n').slice(0, 2).join('\n');
+                
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" style="border-radius: 1rem;">
+                    </div>
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-description">${shortDescription}...</p>
+                    <p class="product-price">${product.price} ج.م</p>
+                    <button class="add-to-cart-btn" onclick="event.stopPropagation(); window.location.href='product.html?id=${product.id}'">عرض التفاصيل</button>
+                `;
+                
+                container.appendChild(productCard);
+            });
+        }
+        
+        // Load products when page loads
+        document.addEventListener('DOMContentLoaded', loadValeroProducts);
+        
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animated elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+            animatedElements.forEach(el => observer.observe(el));
+            
+            // Add staggered animation to product cards
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach((card, index) => {
+                card.classList.add('scale-in');
+                card.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(card);
+            });
+            
+            // Add animation to press logo cards
+            const pressCards = document.querySelectorAll('.press-logo-card');
+            pressCards.forEach((card, index) => {
+                card.classList.add('scale-in');
+                card.style.transitionDelay = `${index * 0.2}s`;
+                observer.observe(card);
+            });
+        });
+        
+    </script>
+</body>
+</html>
