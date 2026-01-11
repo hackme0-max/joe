@@ -453,7 +453,6 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 ELKAYAL. جميع الحقوق محفوظة.</p>
-                <p>&copy; صنع بواسطة ياسين محمد.</p>
             </div>
         </div>
     </footer>
@@ -568,8 +567,6 @@
                 items: cart,
                 total: getCartTotal()
             };
-
-            // Send to Telegram
             const success = await sendToTelegram(orderData);
 
             if (success) {
